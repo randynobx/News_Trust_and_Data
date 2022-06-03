@@ -1,4 +1,4 @@
-# News, Trust, and Data Access
+# News, Trust, and Data
 
 This repository contains the data and working notebooks for the analysis of the intersection between trust in online news reporting and various demographic groups.
 
