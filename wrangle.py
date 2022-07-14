@@ -1,6 +1,4 @@
-###############################
-###      Data Wrangling     ###
-###############################
+'''Data Wrangling Module'''
 
 # Imports
 import pandas as pd
@@ -78,15 +76,25 @@ col_names = {
 # Response -> Question
 questions = {
     'Data_Access':['Decrease Trust', 'No Change', 'Increase Trust'],
-    'General_Trust':['None at all', 'Not very much', 'Fair amount', 'Great amount'],
-    'Income':['0-9,999', '10,000-24,999', '25,000-49,999', '50,000-74,999', '75,000-99,999', '100,000-124,999', '125,000-149,999', '150,000-174,999', '175,000-199,999', '200,000+', 'Prefer not to answer'],
-    'Trump_Approval':['Strongly disapprove', 'Somewhat disapprove', 'Somewhat approve', 'Strongly approve'],
-    'Political_View':['Very Liberal', 'Liberal', 'Moderate', 'Conservative', 'Very Conservative'],
+    'General_Trust':['None at all', 'Not very much', 'Fair amount',
+                     'Great amount'],
+    'Income':['0-9,999', '10,000-24,999', '25,000-49,999', '50,000-74,999',
+              '75,000-99,999', '100,000-124,999', '125,000-149,999',
+              '150,000-174,999', '175,000-199,999', '200,000+',
+              'Prefer not to answer'],
+    'Trump_Approval':['Strongly disapprove', 'Somewhat disapprove',
+                      'Somewhat approve', 'Strongly approve'],
+    'Political_View':['Very Liberal', 'Liberal', 'Moderate', 'Conservative',
+                      'Very Conservative'],
     'Pay_For_News':['Yes', 'No'],
     'Age':['18-29','30-44','45-59','60+'],
     'Gender':['Male', 'Female'],
-    'Region':['New England','Middle Atlantic','East North Central','West North Central','South Atlantic','East South Central','West South Central','Mountain','Pacific'],
-    'Device':['iOS Phone/Tablet','Android Phone/Tablet','Other Phone/Tablet','Windows Desktop/Laptop','MacOS Desktop/Laptop','Other Desktop/Laptop']
+    'Region':['New England','Middle Atlantic','East North Central',
+              'West North Central','South Atlantic','East South Central',
+              'West South Central','Mountain','Pacific'],
+    'Device':['iOS Phone/Tablet','Android Phone/Tablet','Other Phone/Tablet',
+              'Windows Desktop/Laptop','MacOS Desktop/Laptop',
+              'Other Desktop/Laptop']
 }
 
 
@@ -95,16 +103,26 @@ questions = {
 ###############################
 
 def set_categories(surveys):
+    '''Set columns to 'Categorical' in DataFrame
+
+    Args: surveys (list): list of DataFrames to set categories
+    '''
+
     # Preferred order of categories
     order = {}
     order['Data_Access'] = ['Decrease Trust', 'No change', 'Increase Trust']
     order['General_Trust'] = ['None at all', 'Not very much', 'Fair amount', 'Great amount']
-    order['Income'] = ['0-9,999', '10,000-24,999', '25,000-49,999', '50,000-74,999', '75,000-99,999', '100,000-124,999', '125,000-149,999', '150,000-174,999', '175,000-199,999', '200,000+', 'Prefer not to answer']
-    order['Trump_Approval'] = ['Strongly disapprove', 'Somewhat disapprove', 'Somewhat approve', 'Strongly approve']
-    order['Political_View'] = ['Very Liberal', 'Liberal', 'Moderate', 'Conservative', 'Very Conservative']
+    order['Income'] = ['0-9,999', '10,000-24,999', '25,000-49,999',
+                       '50,000-74,999', '75,000-99,999', '100,000-124,999',
+                       '125,000-149,999', '150,000-174,999', '175,000-199,999',
+                       '200,000+', 'Prefer not to answer']
+    order['Trump_Approval'] = ['Strongly disapprove', 'Somewhat disapprove',
+                               'Somewhat approve', 'Strongly approve']
+    order['Political_View'] = ['Very Liberal', 'Liberal', 'Moderate',
+                               'Conservative', 'Very Conservative']
 
     # Set order for specified categories
-    for c in order.keys():
-        for s in surveys:
-            if c in s.columns:
-                s[c] = pd.Categorical(s[c], order[c])
+    for col, val  in order.items():
+        for survey in surveys:
+            if col in survey.columns:
+                survey[col] = pd.Categorical(survey[col], val)
